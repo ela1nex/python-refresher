@@ -5,18 +5,24 @@ class BankAccount:
         self.account_number = account_number
 
     def withdraw(self, amount):
-        if amount > self.balance:
-            raise ValueError("Insufficient funds")
-        if amount <= 0:
-            raise ValueError("Withdrawal amount must be positive")
+        """Withdraw money from the balance of an instance of BankAccount."""
+        if (
+            (type(amount) != int and type(amount) != float)
+            or amount > self.balance
+            or amount <= 0
+        ):
+            return False
         self.balance -= amount
-        return self.balance
+        return True
 
     def deposit(self, amount):
-        if amount <= 0:
-            raise ValueError("Deposit amount must be positive")
+        """Deposit money into the balance of an instance of BankAccount."""
+        if (type(amount) != int and type(amount) != float) or amount <= 0:
+            return False
         self.balance += amount
-        return self.balance
+        return True
 
     def get_balance(self):
+        """Print the balance of an instance of BankAccount."""
+        print(f"current balance: {self.balance}")
         return self.balance
